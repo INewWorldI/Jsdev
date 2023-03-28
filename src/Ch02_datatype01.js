@@ -32,13 +32,13 @@ for(let i=0;i <= 9; i++) {
 // 자바스크립트 배열
 let arrays = ['가', '나', '다', '라', '마', '바', '사'];
 
-arrays.push('아') // 마지막 요소 추가
-arrays.pop() // 마지막 요소 제거
-arrays.shift() // 첫번째 요소 제거
-arrays.unshift('첫') // 첫번째 요소 추가
-arrays.splice(1, 3) // 중간 요소 제거
-arrays.includes('다') // 값 찾기 // Boolean 값을 리턴함
-arrays.indexOf('다') // 값 찾기 // 해당 값의 인덱스 번호를 리턴함 
-arrays.lastIndexOf('마') // 값 찾기 // 뒤에서 부터 해당 값의 인덱스 번호를 리턴함 
-arrays.length() // 배열의 길이값을 리턴함
+console.log(arrays.push('아')) // 마지막 요소 추가
+console.log(arrays.pop()) // 마지막 요소 제거
+console.log(arrays.shift()) // 첫번째 요소 제거
+console.log(arrays.unshift('첫')) // 첫번째 요소 추가
+console.log(arrays.splice(1, 3)) // 중간 요소 제거
+console.log(arrays.includes('다')) // 값 찾기 // Boolean 값을 리턴함
+console.log(arrays.indexOf('다')) // 값 찾기 // 해당 값의 인덱스 번호를 리턴함 
+console.log(arrays.lastIndexOf('마')) // 값 찾기 // 뒤에서 부터 해당 값의 인덱스 번호를 리턴함 
+console.log(arrays.length) // 배열의 길이값을 리턴함
 
