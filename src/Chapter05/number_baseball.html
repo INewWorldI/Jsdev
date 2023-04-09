@@ -1,0 +1,81 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자야구 게임 by Javascript</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="input">
+        <button>확인</button>
+    </form>
+    <div id="logs"></div>
+    <script>
+        const $input = document.querySelector('#input');
+        const $form = document.querySelector('#form');
+        const $logs = document.querySelector('#logs');
+      
+        const numbers = []; // 1부터 9 까지의 배열 생성
+        for (let n = 0; n < 9; n += 1) {
+          numbers.push(n + 1);
+        }
+        const answer = []; // 라이브러리를 통해서 4가지의 배열을 랜덤으로 선정한다.
+        for (let n = 0; n < 4; n += 1) { 
+          const index = Math.floor(Math.random() * numbers.length); 
+          answer.push(numbers[index]);
+          numbers.splice(index, 1);
+        }
+        console.log(answer);
+      
+        const tries = []; // 입력 된 숫자들의 대한 예외 처리
+        function checkInput(input) {
+          if (input.length !== 4) {
+            return alert('4자리 숫자를 입력해 주세요.');
+          }
+          if (new Set(input).size !== 4) { 
+            return alert('중복되지 않게 입력해 주세요.');
+          }
+          if (tries.includes(input)) {
+            return alert('이미 시도한 값입니다.');
+          }
+          return true;
+        }
+      
+        $form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const value = $input.value;
+          $input.value = '';
+          if (!checkInput(value)) {
+            return;
+          }
+
+          if (answer.join('') === value) { // 저장된 정답과 입력한 정답이 맞는지 검증
+            $logs.textContent = '홈런!';
+            return;
+          }
+          if (tries.length >= 9) { // 입력할 수 있는 횟수를 제한하고 틀리면 정답도 출력
+            const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+            $logs.appendChild(message);
+            return;
+          }
+
+          let strike = 0;
+          let ball = 0;
+
+          for (let i = 0; i < answer.length; i++) { // 각 자리의 숫자에 대한 검증
+            const index = value.indexOf(answer[i]);
+            if (index > -1) { // 해당 값이 있는지
+              if (index === i) { 
+                strike += 1; // 자리도 같으면 스트라이크
+              } else {
+                ball += 1; // 아니면 볼
+              }
+            }
+          }
+          $logs.append(`${value}: ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+          tries.push(value); // 입력값 저장
+        });
+      </script>
+</body>
+</html>
