@@ -42,6 +42,7 @@
         let numOne = '';
         let operator  = '';
         let numTwo = '';
+        let saveNum = '';
         const $operator = document.querySelector('#operator');
         const $result = document.querySelector('#result');
         const onClickNumber = (event) => { // 고차 함수 (high order function): 함수 안에 함수가 리턴한다.
@@ -55,7 +56,12 @@
                 }
                 numTwo += event.target.textContent;
                 $result.value += event.target.textContent;
-        };        
+        };
+        const additionalCalculation = (value) => { // 계산기 추가연산 메서드
+            numOne = value;
+            operator = '';
+            numTwo = '';
+        };         
         document.querySelector('#num-0').addEventListener('click', onClickNumber);
         document.querySelector('#num-1').addEventListener('click', onClickNumber);
         document.querySelector('#num-2').addEventListener('click', onClickNumber);
@@ -85,15 +91,19 @@
                 switch (operator) {
                     case '+':
                         $result.value = parseInt(numOne) + parseInt(numTwo);
+                        additionalCalculation($result.value);
                         break;
                     case '-':
                         $result.value = parseInt(numOne) - parseInt(numTwo);
+                        additionalCalculation($result.value);
                         break;
                     case '*':
                         $result.value = parseInt(numOne) * parseInt(numTwo);
+                        additionalCalculation($result.value);
                         break;
                     case '/':
                         $result.value = parseInt(numOne) / parseInt(numTwo);
+                        additionalCalculation($result.value);
                         break;
                     default:
                         break;
@@ -105,6 +115,7 @@
             numOne = '';
             operator = '';
             numTwo = '';
+            saveNum = ''
             $operator.value = '';
             $result.value = '';
         });
